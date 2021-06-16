@@ -2,19 +2,15 @@ package sample.App;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class App extends Application {
 
+    private final InitilizationWindow window = new InitilizationWindow();
+
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("../View/authorization.fxml"));
-        primaryStage.setTitle("ООО\"Евросетка\" ");
-        primaryStage.setResizable(false);
-        primaryStage.setScene(new Scene(root, 700, 400));
-        primaryStage.show();
+        var fxmlLoader = window.initFxmlLoader(new FXMLLoader(), "ООО \"Евросетка\"", "../View/authorization.fxml");
     }
 
     public static void main(String[] args) {
