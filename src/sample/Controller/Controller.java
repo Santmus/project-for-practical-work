@@ -10,10 +10,11 @@ import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import sample.App.AlertClass;
+import sample.App.InitilizationWindow;
 
 public class Controller {
 
-    private final String []negativeElements = {"\\","/", ":", "*", "?", "<", ">", "|"};
+    private final String[] negativeElements = {"\\", "/", ":", "*", "?", "<", ">", "|"};
 
     @FXML
     private TextField loginTextField;
@@ -27,47 +28,30 @@ public class Controller {
     @FXML
     private Button registrationButton;
 
+    private final InitilizationWindow window = new InitilizationWindow();
+
     @FXML
     void initialize() {
-    enteredButton.setOnAction(actionEvent -> {
-        if(loginTextField.getText().isEmpty() || passwordTextField.getText().isEmpty()){
-            new AlertClass(2, "Не заполненны все поля. Пожалуйста проверьте коррекность ввода", "Недостаточно данных", "Внимание");
-        } else {
-            checkNegativeSymbols(loginTextField.getText(), passwordTextField.getText());
-            try {
-                var fxmlLoader = initFxmlLoader(new FXMLLoader(), "Главное меню", "../View/app.fxml");
-            } catch (IOException e) {
-                System.out.println("This warning is" + e +"\nPlease correct this warning and repeat this again");
+        enteredButton.setOnAction(actionEvent -> {
+            boolean check = window.checkFields(true, loginTextField.getText(), passwordTextField.getText());
+            if (!check) {
+                new AlertClass(2, "Не заполненны все поля. Пожалуйста введите все данные, которые от вас требуются", "Внимание", "Недостаточно данных");
+            } else {
+                try {
+                    var fxmlLoader = window.initFxmlLoader(new FXMLLoader(), "Главное меню", "../View/app.fxml");
+
+                } catch (IOException e) {
+                    System.out.println("This warning is" + e + "\nPlease correct this warning and repeat this again");
+                }
             }
-        }
-    });
+        });
 
-    registrationButton.setOnAction(actionEvent -> {
-        try {
-            var fxmlLoader = initFxmlLoader(new FXMLLoader(), "Регистрация", "../View/registration.fxml");
-        } catch (IOException e) {
-            System.out.println("This warning is" + e +"\nPlease correct this warning and repeat this again");
-        }
-    });
-    }
-
-    private void checkNegativeSymbols(String login, String password) {}
-
-    private Stage initStage(Parent root,  String title) {
-        Stage stage = new Stage();
-        stage.setTitle(title);
-        stage.setResizable(false);
-        stage.setScene(new Scene(root, 700, 400));
-        stage.initModality(Modality.APPLICATION_MODAL);
-        return stage;
-    }
-
-    private FXMLLoader initFxmlLoader(FXMLLoader loader, String title, String path) throws IOException {
-        loader.setLocation(getClass().getResource(path));
-        loader.load();
-        Parent root = loader.getRoot();
-        var stage = initStage(root, title);
-        stage.show();
-        return loader;
+        registrationButton.setOnAction(actionEvent -> {
+            try {
+                var fxmlLoader = window.initFxmlLoader(new FXMLLoader(), "Регистрация", "../View/registration.fxml");
+            } catch (IOException e) {
+                System.out.println("This warning is" + e + "\nPlease correct this warning and repeat this again");
+            }
+        });
     }
 }
