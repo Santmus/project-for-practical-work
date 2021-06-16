@@ -30,4 +30,7 @@ public class AlertClass{
         alert.setContentText(content);
         Optional<ButtonType> option = alert.showAndWait();
     }
+
+    private void setConfirmationAlertInformation(Alert alert, String content, String title, String header){
+    }
 }

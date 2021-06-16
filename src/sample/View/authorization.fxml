@@ -6,11 +6,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #2e3348;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller.Controller">
    <children>
       <AnchorPane layoutY="99.0" prefHeight="301.0" prefWidth="700.0" style="-fx-background-color: fafafa;">
          <children>
+
             <Label layoutX="220.0" layoutY="63.0" text="Введите логин:" textFill="#5e4c4c">
                <font>
                   <Font name="Calibri" size="23.0" />
@@ -23,9 +23,9 @@
             </Label>
             <TextField fx:id="loginTextField" layoutX="220.0" layoutY="97.0" prefHeight="27.0" prefWidth="320.0" promptText="Введите логин" style="-fx-background-radius: 5;" />
             <TextField fx:id="passwordTextField" layoutX="220.0" layoutY="170.0" prefHeight="27.0" prefWidth="320.0" promptText="Введите пароль" style="-fx-background-radius: 5;" />
-            <Button fx:id="enteredButton" layoutX="311.0" layoutY="216.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="138.0" style="-fx-background-radius: 5; -fx-background-color: #f28a45;" text="Войти" textFill="#f8f6f5">
+            <Button fx:id="enteredButton" layoutX="393.0" layoutY="215.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="138.0" style="-fx-background-radius: 5; -fx-background-color: #f28a45;" text="Войти" textFill="#f8f6f5">
                <font>
-                  <Font name="Calibri Italic" size="23.0" />
+                  <Font name="Calibri Italic" size="19.0" />
                </font>
             </Button>
             <Label layoutX="268.0" layoutY="7.0" text="Авторизация" textFill="#c37979">
@@ -33,6 +33,11 @@
                   <Font name="Corbel Bold Italic" size="36.0" />
                </font>
             </Label>
+            <Button fx:id="registrationButton" layoutX="226.0" layoutY="215.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="138.0" style="-fx-background-radius: 5; -fx-background-color: #2e3348;" text="Регистрация" textFill="#f8f6f5">
+               <font>
+                  <Font name="Calibri Italic" size="19.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
       <Label layoutX="137.0" layoutY="25.0" text="Добро пожаловать" textFill="#fffefe">
