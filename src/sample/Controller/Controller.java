@@ -41,8 +41,7 @@ public class Controller {
             } else {
                 try {
                     var fxmlLoader = window.initFxmlLoader(new FXMLLoader(), "Главное меню", "../View/app.fxml");
-                    Stage stage = (Stage) enteredButton.getScene().getWindow();
-                    stage.close();
+                    window.closeWindow(enteredButton);
                 } catch (IOException e) {
                     System.out.println("This warning is" + e + "\nPlease correct this warning and repeat this again");
                 }
@@ -52,8 +51,7 @@ public class Controller {
         registrationButton.setOnAction(actionEvent -> {
             try {
                 var fxmlLoader = window.initFxmlLoader(new FXMLLoader(), "Регистрация", "../View/registration.fxml");
-                Stage stage = (Stage) registrationButton.getScene().getWindow();
-                stage.close();
+                window.closeWindow(registrationButton);
             } catch (IOException e) {
                 System.out.println("This warning is" + e + "\nPlease correct this warning and repeat this again");
             }

@@ -1,5 +1,6 @@
 package sample.App;
 
+import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
@@ -17,20 +18,28 @@ public class AlertClass{
         Alert alert;
         if (number == 1){
             alert = new Alert(Alert.AlertType.INFORMATION);
-            setAlertInformation(alert, content, title, header);
+            getAlertInformation(alert, content, title, header);
         }
         else if (number == 2)
         {
             alert = new Alert(Alert.AlertType.WARNING);
-            setAlertInformation(alert, content, title, header);
+            getAlertInformation(alert, content, title, header);
         }
         else if (number == 3){
             alert = new Alert(Alert.AlertType.CONFIRMATION);
-            setAlertInformation(alert, content, title, header);
+            getAlertInformation(alert, content, title, header);
         }
     }
 
-    private void setAlertInformation(Alert alert, String content, String title, String header){
+    public AlertClass(String content, String title, String header, Stage stage){
+        Alert alert;
+        alert = new Alert(Alert.AlertType.CONFIRMATION);
+        getExitInformation(alert, content, title, header, stage);
+    }
+
+
+
+    private void getAlertInformation(Alert alert, String content, String title, String header){
         alert.setTitle(title);
         var stage = (Stage) alert.getDialogPane().getScene().getWindow();
         stage.getIcons().add(new Image(AlertClass.class.getResourceAsStream("../Assets/logo.png"))) ;
@@ -38,7 +47,25 @@ public class AlertClass{
         alert.setContentText(content);
         Optional<ButtonType> option = alert.showAndWait();
     }
+    
+    private void getExitInformation(Alert alert, String content, String title, String header, Stage returnStage){
+        alert.setTitle(title);
+        var stage = (Stage) alert.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image(AlertClass.class.getResourceAsStream("../Assets/logo.png"))) ;
+        alert.setContentText(content);
+        alert.setHeaderText(content);
+        ButtonType exitProgramButton = new ButtonType("Завершить");
+        ButtonType returnProgramButton = new ButtonType("Отмена");
+        alert.getButtonTypes().clear();
+        alert.getButtonTypes().addAll(returnProgramButton, exitProgramButton);
+        Optional<ButtonType> option = alert.showAndWait();
+        option.get();
+        // fix return window
+        if (option.get() == returnProgramButton) {
 
-    private void setConfirmationAlertInformation(Alert alert, String content, String title, String header){
+        } else if (option.get() == exitProgramButton) {
+            System.out.println("Program finish work");
+            Platform.exit();
+        }
     }
 }
