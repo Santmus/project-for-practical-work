@@ -3,13 +3,9 @@ package sample.Controller;
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import sample.App.AlertClass;
+import sample.AlertClass;
 import sample.App.InitilizationWindow;
 
 public class Controller {
@@ -31,7 +27,7 @@ public class Controller {
     @FXML
     void initialize() {
         enteredButton.setOnAction(actionEvent -> {
-            boolean check = window.checkFields(true, loginTextField.getText(), passwordTextField.getText());
+            boolean check = window.checkFields(true, loginTextField.getText().trim(), passwordTextField.getText().trim());
             boolean negativeElements = window.checkNegativeElements(loginTextField.getText(), passwordTextField.getText());
             if (!check) {
                 new AlertClass(2, "Не заполненны все поля. Пожалуйста введите все данные, которые от вас требуются", "Внимание", "Недостаточно данных");
@@ -39,13 +35,14 @@ public class Controller {
             else if (!negativeElements) {
                 new AlertClass(2, "Присутствуют запрещенные символы. Проверьте еще раз строку и повторите попытку", "Внимание", "Запрещенные символы");
             } else {
-                try {
-                    var fxmlLoader = window.initFxmlLoader(new FXMLLoader(), "Главное меню", "../View/app.fxml");
-                    window.closeWindow(enteredButton);
-                } catch (IOException e) {
-                    System.out.println("This warning is" + e + "\nPlease correct this warning and repeat this again");
+                    try {
+                        loginUser(loginTextField.getText(), passwordTextField.getText());
+                        var fxmlLoader = window.initFxmlLoader(new FXMLLoader(), "Главное меню", "../View/app.fxml");
+                        window.closeWindow(enteredButton);
+                    } catch (IOException e) {
+                        System.out.println("This warning is" + e + "\nPlease correct this warning and repeat this again");
+                    }
                 }
-            }
         });
 
         registrationButton.setOnAction(actionEvent -> {
@@ -56,5 +53,8 @@ public class Controller {
                 System.out.println("This warning is" + e + "\nPlease correct this warning and repeat this again");
             }
         });
+    }
+
+    private void loginUser(String user, String passsword) {
     }
 }

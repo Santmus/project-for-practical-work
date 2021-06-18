@@ -1,4 +1,4 @@
-package sample.App;
+package sample;
 
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
@@ -42,7 +42,7 @@ public class AlertClass{
     private void getAlertInformation(Alert alert, String content, String title, String header){
         alert.setTitle(title);
         var stage = (Stage) alert.getDialogPane().getScene().getWindow();
-        stage.getIcons().add(new Image(AlertClass.class.getResourceAsStream("../Assets/logo.png"))) ;
+        stage.getIcons().add(new Image(AlertClass.class.getResourceAsStream("Assets/logo.png"))) ;
         alert.setHeaderText(header);
         alert.setContentText(content);
         Optional<ButtonType> option = alert.showAndWait();
@@ -51,7 +51,7 @@ public class AlertClass{
     private void getExitInformation(Alert alert, String content, String title, String header, Stage returnStage){
         alert.setTitle(title);
         var stage = (Stage) alert.getDialogPane().getScene().getWindow();
-        stage.getIcons().add(new Image(AlertClass.class.getResourceAsStream("../Assets/logo.png"))) ;
+        stage.getIcons().add(new Image(AlertClass.class.getResourceAsStream("Assets/logo.png"))) ;
         alert.setContentText(content);
         alert.setHeaderText(content);
         ButtonType exitProgramButton = new ButtonType("Завершить");
