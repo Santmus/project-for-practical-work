@@ -31,9 +31,6 @@ public class Controller {
 
     @FXML
     void initialize() {
-        DatabaseHandler dbHandler = new DatabaseHandler();
-
-        User user = new User();
 
         enteredButton.setOnAction(actionEvent -> {
             boolean check = window.checkFields(true, loginTextField.getText().trim(), passwordTextField.getText().trim());
@@ -45,40 +42,45 @@ public class Controller {
             else if (!negativeElements) {
                 new AlertClass(2, "Присутствуют запрещенные символы. Проверьте еще раз строку и повторите попытку", "Внимание", "Запрещенные символы");
             } else {
-                user.setLogin(loginTextField.getText());
-                user.setPassword(passwordTextField.getText());
-                ResultSet result = dbHandler.getUser(user);
-
-                int counter = 0;
-
-
-                try {
-                    while (result.next()){
-                        counter++;
-                    }
-                    if (counter >= 1) {
-                        var fxmlLoader = window.initFxmlLoader(new FXMLLoader(), "Главное меню", "../View/app.fxml");
-                        window.closeWindow(enteredButton);
-                    }
-                    } catch (IOException | SQLException e) {
-                        System.out.println("This warning is" + e + "\nPlease correct this warning and repeat this again");
-                    }
-                }
+                getInformationOnEntered(loginTextField.getText(), passwordTextField.getText());
+            }
         });
 
         registrationButton.setOnAction(actionEvent -> {
-            try {
-                var fxmlLoader = window.initFxmlLoader(new FXMLLoader(), "Регистрация", "../View/registration.fxml");
-                window.closeWindow(registrationButton);
-            } catch (IOException e) {
-                System.out.println("This warning is" + e + "\nPlease correct this warning and repeat this again");
-            }
+            initFxml("../View/registration.fxml");
         });
     }
 
     private void getInformationOnEntered(String login, String password){
         DatabaseHandler dbHandler = new DatabaseHandler();
 
+        User user = new User();
+        user.setLogin(loginTextField.getText());
+        user.setPassword(passwordTextField.getText());
+
+        ResultSet result = dbHandler.getUser(user);
+
+        int counter = 0;
+
+        try {
+            while (result.next()){
+                counter++;
+            }
+            if (counter >= 1) {
+                initFxml("../View/app.fxml");
+            }
+        } catch (SQLException e) {
+            e.getSQLState();
+        }
+    }
+
+    private void initFxml(String path){
+        try {
+            var fxmlLoader = window.initFxmlLoader(new FXMLLoader(), "Регистрация", path);
+            window.closeWindow(registrationButton);
+        } catch (IOException e) {
+            System.out.println("This warning is" + e + "\nPlease correct this warning and repeat this again");
+        }
     }
 
 }
