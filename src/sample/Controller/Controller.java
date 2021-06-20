@@ -3,12 +3,17 @@ package sample.Controller;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Timer;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.util.Duration;
 import sample.AlertClass;
+import sample.Animations.Shake;
 import sample.App.InitilizationWindow;
 import sample.Database.ConfigsDatabase.DatabaseHandler;
 import sample.Database.InformationUser.User;
@@ -32,6 +37,8 @@ public class Controller {
 
     @FXML
     private Button registrationButton;
+
+    private Shake shake = new Shake();
 
     /**
      * {@value - Создание объекта, который будет отвечать за проверку и создание нового окна}
@@ -90,6 +97,9 @@ public class Controller {
             if (counter >= 1) {
                 initFxml("../View/app.fxml");
             }
+            else{
+                playAnimationOnButtonSignUp(passwordTextField, loginTextField);
+            }
         } catch (SQLException e) {
             e.getSQLState();
         }
@@ -109,6 +119,23 @@ public class Controller {
         } catch (IOException e) {
             System.out.println("This warning is" + e + "\nPlease correct this warning and repeat this again");
         }
+    }
+
+    /**
+     * Метод, который проигрывает анимацию и стирает предыдущее данные
+     * @since 1.0.6
+     * @see Controller#initialize()
+     * @param loginTextField поле с логиным
+     * @param passwordTextField поле с паролем*/
+    private void playAnimationOnButtonSignUp(TextField passwordTextField,TextField loginTextField){
+        shake.playAnimationField(passwordTextField);
+        shake.playAnimationField(loginTextField);
+
+        loginTextField.clear();
+        passwordTextField.clear();
+
+        loginTextField.setPromptText("Введите верный логин");
+        passwordTextField.setPromptText("Введите верный пароль");
     }
 
 }
