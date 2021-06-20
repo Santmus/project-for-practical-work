@@ -1,5 +1,11 @@
 package sample.Database.ConfigsDatabase;
 
+/**
+ * Данный класс представляет собой данные об соединений к БД <b><font color = red>MySQL</font></b>
+ * @author Евгений Казаченко
+ * @since 1.0.4
+ * @version 1.0.5 - SHAPSHOOT
+ * */
 public class Configs {
 
     protected String dbConnect = "jdbc:mysql://";

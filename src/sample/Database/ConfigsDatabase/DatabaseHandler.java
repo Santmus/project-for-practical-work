@@ -1,12 +1,24 @@
 package sample.Database.ConfigsDatabase;
 
+import sample.Controller.ControllerRegistration;
 import sample.Database.InformationUser.User;
 
 import java.sql.*;
-
+/**
+ * Данный класс представляет собой запросы при добавлении и авторизация пользователя к БД <b><font color = red>MySQL</font></b>
+ * @author Евгений Казаченко
+ * @since 1.0.4
+ * @version 1.0.5 - SHAPSHOOT
+ * */
 public class DatabaseHandler extends Configs {
+
     Connection dbConnection;
 
+    /**
+     * Конструктор предназначен для подключение к БД, в случае успеха происходит поключение и последующий <b>SQL</b> - запрос,
+     * иначе ошибка о невозможности подключить БД в приложение
+     * @since 1.0.4
+     * */
     public Connection getDbConnection()
             throws ClassNotFoundException, SQLException {
         String connectionString = dbConnect + dbHost
@@ -18,6 +30,14 @@ public class DatabaseHandler extends Configs {
         return dbConnection;
     }
 
+    /**
+     * Метод предназначен для добавление пользователя в <b><font color = red>MySQL</font></b>, возмоджностью дальнейшей авторизации этим пользователем
+     * @since 1.0.4
+     * @param user передается весь пользователь с необходимыми данными в методе
+     * @throws SQLException отсутсвует подключение к <b><font color = red>MySQL</font></b>, в связи с отсутсвием БД в системе
+     * @throws ClassNotFoundException не существует такого где происходит поключение к БД
+     * @see ControllerRegistration#initialize()
+     * */
     public void addUserToDatabase(User user) {
         PreparedStatement addUserToDatabase = null;
         try {
@@ -41,7 +61,14 @@ public class DatabaseHandler extends Configs {
             e.printStackTrace();
         }
     }
-
+    /**
+     * Метод предназначен для авторизации пользователя в <b><font color = red>приложений</font></b>,с возмоджностью дальнейшей работы этим пользователям
+     * @since 1.0.4
+     * @param user передается весь пользователь с необходимыми данными в методе
+     * @see sample.Controller.Controller#getInformationOnEntered(String, String)
+     * @throws SQLException отсутсвует подключение к <b><font color = red>MySQL</font></b>, в связи с отсутсвием БД в системе
+     * @throws ClassNotFoundException не существует такого где происходит поключение к БД
+     * */
     public ResultSet getUser(User user) {
         ResultSet resultSet = null;
         try {
@@ -50,7 +77,7 @@ public class DatabaseHandler extends Configs {
                     + Const.WHERE + Const.USER_LOGIN + "=? AND " + Const.USER_PASSWORD
                     + "=?";
 
-            //System.out.println(getUser);
+            System.out.println(getUser);
 
             PreparedStatement addUserToDatabase = connection.prepareStatement(getUser);
             addUserToDatabase.setString(1, user.getLogin());

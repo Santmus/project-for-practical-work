@@ -8,13 +8,33 @@ import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import sample.AlertClass;
+import sample.Controller.Controller;
+import sample.Controller.ControllerRegistration;
 
 import java.io.IOException;
 
+/**
+ * <p>Данный класс предназначен для создания окон приложения и проверки полей при инициализации и авторизации пользователей в системе</p>
+ * <p>Пример: {@link InitilizationWindow#checkFields(boolean, String...)} - проверка полей </p>
+ * @author Евгений Казаченко
+ * @since 1.0.1
+ * @version 1.0.5 - SNAPSHOOT
+ * */
 public class InitilizationWindow {
 
+    /**
+     * {@value - нежелательные элементы при авторизации и регистрации пользователя}
+     * */
     private final String[] negativeElements = {"\\", "/", ":", "*", "?", "<", ">", "|", " "};
 
+    /**
+     * Метод, который возращает окно
+     * @since 1.0.1
+     * @param root объект, образующий новое окно
+     * @param title заголовок для нового окна
+     * @return новое окно
+     * @see InitilizationWindow#initStage(Parent, String)
+     * */
     private Stage initStage(Parent root, String title) {
         Stage stage = new Stage();
         stage.setTitle(title);
@@ -26,12 +46,26 @@ public class InitilizationWindow {
         return stage;
     }
 
+    /**
+     * Метод предназначен для активации скрипта - закрытии окна, при переходе к другому окну
+     * @param stage нынешнее окно приложения
+     * @since 1.0.1
+     * @see InitilizationWindow#initStage(Parent, String)
+     * */
     private void closeStage(Stage stage){
         stage.setOnCloseRequest(event -> {
         new AlertClass("Вы точно хотите выйти из программы?","ООО \"Евросетка\"","Выход из приложения", stage);
         });
     }
 
+    /**
+     * <p>Метод предназначенный для загрузки <b>FXML</b> файла, находящегося в репозирории:<u>/sample/View</u></p>
+     * @since 1.0.1
+     * @param title заголовок для нового окна
+     * @param loader загрузка необходимого <b>FXML</b> файла
+     * @param path путь к нужному <b>FXML</b> файлу. Путь относительный
+     * @return возращает загрузчик <b>FXML</b> файла
+     * */
     public FXMLLoader initFxmlLoader(FXMLLoader loader, String title, String path) throws IOException {
         loader.setLocation(getClass().getResource(path));
         loader.load();
@@ -41,6 +75,15 @@ public class InitilizationWindow {
         return loader;
     }
 
+    /**
+     * Метод предназначен для проверки пустых значений в введенных полях
+     * @param strings <b>varargs</b> String-ов для проверки, введенны ли значения в поля
+     * @param value предназначен для определения, является ли поля пустым, или нет
+     * @since 1.0.2
+     * @see Controller#initialize()
+     * @see ControllerRegistration#initialize()
+     * @return возращает <b>true</b> если все поля заполненны, иначе <b>false</b>
+     **/
     public boolean checkFields (boolean value, String ...strings){
         for (String t: strings) {
             if (t.isEmpty()) {
@@ -51,6 +94,14 @@ public class InitilizationWindow {
     return value;
     }
 
+    /**
+     * Метод предназначен для проверки запрещенных символов в введенных полях
+     * @param strings <b>varargs</b> String-ов запрещенных элементов в полях
+     * @since 1.0.3
+     * @see Controller#initialize()
+     * @see ControllerRegistration#initialize()
+     * @return возращает <b>true</b> если нет запрещенных элементов в введенных полях, иначе <b>false</b>
+     **/
     public boolean checkNegativeElements(String ...strings){
         for (String str:strings) {
             for (int i = 0; i < str.length(); i++){
@@ -66,6 +117,13 @@ public class InitilizationWindow {
         return true;
     }
 
+    /**
+     * Метод предназначен для проверки количество введенных символов при регистрации пользователя, а именно пароля
+     * @param string значение поля пароля
+     * @since 1.0.3
+     * @see ControllerRegistration#initialize()
+     * @return возращает <b>true</b> если введенный пароль больше или равно 8, иначе <b>false</b>
+     **/
     public boolean checkLengthString (String string){
         if (string.length() < 8){
         return false;
@@ -73,6 +131,13 @@ public class InitilizationWindow {
         return true;
     }
 
+    /**
+     * Метод предназначен для закрытия предыдущего окна, при переходе к другому окну
+     * @param button кнопка, из которой происходит переход к другому окну приложения
+     * @since 1.0.1
+     * @see Controller#initFxml(String)
+     * @see ControllerRegistration#initFxml(String)
+     * */
     public void closeWindow(Button button){
         Stage stage = (Stage) button.getScene().getWindow();
         stage.close();

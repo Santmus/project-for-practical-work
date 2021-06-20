@@ -12,6 +12,12 @@ import sample.App.InitilizationWindow;
 import sample.Database.ConfigsDatabase.DatabaseHandler;
 import sample.Database.InformationUser.User;
 
+/**
+ * <p>Класс предназначен для регистрации пользователя приложения, которое использет загрузку из <b>FXML</b> файла с помощью <u><font color='red'>Scene Builder`a</font></u>.</p>
+ * @author Евгений Казаченко
+ * @since 1.0.2
+ * @version 1.0.5 -SNAPSHOOT
+ * */
 public class ControllerRegistration {
 
     @FXML
@@ -37,10 +43,15 @@ public class ControllerRegistration {
 
     @FXML
     private RadioButton radioButtonFemale;
-
+    /**
+     * {@value - Создание объекта, который будет отвечать за проверку и создание нового окна}
+     * */
     private final InitilizationWindow window = new InitilizationWindow();
 
-
+    /**
+     * Метод который инициализирует поведение программы
+     * @since 1.0.2
+     * */
     @FXML
     void initialize() {
         DatabaseHandler dbHandler = new DatabaseHandler();
@@ -80,11 +91,25 @@ public class ControllerRegistration {
         });
     }
 
+
+    /**
+     * Метод, который определяет значение <b>RadioButton</b>
+     * @param radioButtonFemale объект женской кнопки
+     * @since 1.0.5
+     * @see ControllerRegistration#initialize()
+     * */
     private String selectSection (RadioButton radioButtonFemale){
         if (radioButtonFemale.isSelected()) return "Женщина";
         else return "Мужчина";
     }
 
+    /**
+     * Метод, который инициализирует загрузку <b>FXML</b> файла
+     * @param path путь <b>FXML</b> файла
+     * @throws IOException может возникнуть ошибка из-за неправильного пути или отсутсвие файла в системе.
+     * @since 1.0.5
+     * @see ControllerRegistration#initialize()
+     * */
     private void initFxml(String path){
         try {
             var fxmlLoader = window.initFxmlLoader(new FXMLLoader(), "Регистрация", path);
@@ -94,6 +119,11 @@ public class ControllerRegistration {
         }
     }
 
+    /**
+     * Метод, который группирует <b>RadioButton</b>
+     * @since 1.0.5
+     * @see ControllerRegistration#initialize()
+     * */
     private void getRadButtonArray(){
         ObservableList<RadioButton> radButtonArray = FXCollections.observableArrayList();
         radButtonArray.addAll(radioButtonMale, radioButtonFemale);

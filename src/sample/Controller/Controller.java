@@ -13,6 +13,12 @@ import sample.App.InitilizationWindow;
 import sample.Database.ConfigsDatabase.DatabaseHandler;
 import sample.Database.InformationUser.User;
 
+/**
+ * <p>Класс предназначен для авторизации пользователя приложения, которое использет загрузку из <b>FXML</b> файла с помощью <u><font color='red'>Scene Builder`a</font></u>.</p>
+ * @author Евгений Казаченко
+ * @since 1.0.2
+ * @version 1.0.5 -SNAPSHOOT
+ * */
 public class Controller {
 
     @FXML
@@ -27,8 +33,15 @@ public class Controller {
     @FXML
     private Button registrationButton;
 
+    /**
+     * {@value - Создание объекта, который будет отвечать за проверку и создание нового окна}
+     * */
     private final InitilizationWindow window = new InitilizationWindow();
 
+    /**
+     * Метод который инициализирует поведение программы
+     * @since 1.0.2
+     * */
     @FXML
     void initialize() {
 
@@ -51,6 +64,14 @@ public class Controller {
         });
     }
 
+    /**
+     * Метод, авторизирует пользователя в системе, если он есть
+     * @throws SQLException отсутсвует подключение к <b><font color = red>MySQL</font></b>, в связи с отсутсвием БД в системе
+     * @param login логин пользователя
+     * @param password пароль пользователя
+     * @since 1.0.5
+     * @see Controller#initialize()
+     * */
     private void getInformationOnEntered(String login, String password){
         DatabaseHandler dbHandler = new DatabaseHandler();
 
@@ -74,6 +95,13 @@ public class Controller {
         }
     }
 
+    /**
+     * Метод, который инициализирует загрузку <b>FXML</b> файла
+     * @param path путь <b>FXML</b> файла
+     * @throws IOException может возникнуть ошибка из-за неправильного пути или отсутсвие файла в системе.
+     * @since 1.0.5
+     * @see Controller#getInformationOnEntered(String, String)
+     * */
     private void initFxml(String path){
         try {
             var fxmlLoader = window.initFxmlLoader(new FXMLLoader(), "Регистрация", path);
