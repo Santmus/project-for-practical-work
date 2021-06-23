@@ -1,6 +1,7 @@
 package sample.App;
 
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -8,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import sample.AlertClass;
+import sample.Animations.Shake;
 import sample.Controller.Controller;
 import sample.Controller.ControllerRegistration;
 
@@ -27,6 +29,7 @@ public class InitilizationWindow {
      * */
     private final String[] negativeElements = {"\\", "/", ":", "*", "?", "<", ">", "|", " "};
 
+    private Shake shake;
     /**
      * Метод, который возращает окно
      * @since 1.0.1
@@ -88,6 +91,7 @@ public class InitilizationWindow {
         for (String t: strings) {
             if (t.isEmpty()) {
                 value = false;
+
                 break;
             }
         }
@@ -126,9 +130,8 @@ public class InitilizationWindow {
      **/
     public boolean checkLengthString (String string){
         if (string.length() < 8){
-        return false;
-        }
-        return true;
+            return false;
+        } else return true;
     }
 
     /**
@@ -143,5 +146,14 @@ public class InitilizationWindow {
         stage.close();
     }
 
+    /**
+     * Метод, вызывает проигрывание анимации в результате неправильной инициализации пользователя
+     * @since 1.0.6
+     * @see Controller#playAnimationOnButtonSignUp()
+     * */
+    public void playAnimNode(Node node){
+        Shake anim = new Shake(node);
+        anim.playAnim();
+    }
 }
 

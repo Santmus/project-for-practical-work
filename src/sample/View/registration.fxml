@@ -28,8 +28,13 @@
             <TextField fx:id="surnameTextField" layoutX="356.0" layoutY="28.0" prefHeight="36.0" prefWidth="330.0" promptText="Фамилия" style="-fx-background-radius: 5;" />
             <TextField fx:id="passwordTextField" layoutX="356.0" layoutY="77.0" prefHeight="36.0" prefWidth="330.0" promptText="Пароль" style="-fx-background-radius: 5;" />
             <TextField fx:id="specialCodeTextField" layoutX="185.0" layoutY="124.0" prefHeight="36.0" prefWidth="330.0" promptText="Введите специальный код" style="-fx-background-radius: 5;" />
-            <RadioButton fx:id="radioButtonMale" layoutX="225.0" layoutY="177.0" mnemonicParsing="false" text="Мужчина" />
-            <RadioButton fx:id="radioButtonFemale" layoutX="389.0" layoutY="177.0" mnemonicParsing="false" text="Женщина" />
+            <RadioButton fx:id="radioButtonMale" layoutX="227.0" layoutY="186.0" mnemonicParsing="false" text="Мужчина" />
+            <RadioButton fx:id="radioButtonFemale" layoutX="387.0" layoutY="186.0" mnemonicParsing="false" text="Женщина" />
+            <Label fx:id="genderLabel" layoutX="259.0" layoutY="168.0" text="Введите пол сотрудника:" textFill="#d01c1c" visible="false">
+               <font>
+                  <Font name="Candara Italic" size="15.0" />
+               </font>
+            </Label>
             </children>
         </AnchorPane>
       <ImageView fitHeight="106.0" fitWidth="319.0" layoutX="197.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">

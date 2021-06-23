@@ -5,13 +5,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Timer;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
+import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.util.Duration;
 import sample.AlertClass;
 import sample.Animations.Shake;
 import sample.App.InitilizationWindow;
@@ -38,7 +38,11 @@ public class Controller {
     @FXML
     private Button registrationButton;
 
-    private Shake shake = new Shake();
+    @FXML
+    private Label loginLabel;
+
+    @FXML
+    private Label passwordLabel;
 
     /**
      * {@value - Создание объекта, который будет отвечать за проверку и создание нового окна}
@@ -46,7 +50,7 @@ public class Controller {
     private final InitilizationWindow window = new InitilizationWindow();
 
     /**
-     * Метод который инициализирует поведение программы
+     * Метод, который инициализирует поведение приложения в данном окне
      * @since 1.0.2
      * */
     @FXML
@@ -57,29 +61,26 @@ public class Controller {
             boolean negativeElements = window.checkNegativeElements(loginTextField.getText(), passwordTextField.getText());
 
             if (!check) {
-                new AlertClass(2, "Не заполненны все поля. Пожалуйста введите все данные, которые от вас требуются", "Внимание", "Недостаточно данных");
+                new AlertClass(2, "Незаполненны все поля. Пожалуйста введите все данные, которые от вас требуются и повторите попытку", "Ошибка", "Недостаточно данных");
             }
             else if (!negativeElements) {
-                new AlertClass(2, "Присутствуют запрещенные символы. Проверьте еще раз строку и повторите попытку", "Внимание", "Запрещенные символы");
+                new AlertClass(2, "Присутствуют запрещённые символы. Проверьте введенные вами данные и повторите попытку", "Ошибка", "Запрещённые символы");
             } else {
-                getInformationOnEntered(loginTextField.getText(), passwordTextField.getText());
+                getInformationOnEntered();
             }
         });
-
         registrationButton.setOnAction(actionEvent -> {
             initFxml("../View/registration.fxml");
         });
     }
 
     /**
-     * Метод, авторизирует пользователя в системе, если он есть
-     * @throws SQLException отсутсвует подключение к <b><font color = red>MySQL</font></b>, в связи с отсутсвием БД в системе
-     * @param login логин пользователя
-     * @param password пароль пользователя
+     * Метод, находит пользователя в БД <b><u><font color = red>MySQL</font></u></b>, и проводит авторизацию
+     * @throws SQLException отсутсвует подключение к <b><font color = red>MySQL</font></b>, в связи с отсутсвием БД в системе.
      * @since 1.0.5
      * @see Controller#initialize()
      * */
-    private void getInformationOnEntered(String login, String password){
+    private void getInformationOnEntered(){
         DatabaseHandler dbHandler = new DatabaseHandler();
 
         User user = new User();
@@ -98,7 +99,8 @@ public class Controller {
                 initFxml("../View/app.fxml");
             }
             else{
-                playAnimationOnButtonSignUp(passwordTextField, loginTextField);
+                playAnimationOnButtonSignUp();
+                System.err.println("Вход не выполнен, повторите попытку");
             }
         } catch (SQLException e) {
             e.getSQLState();
@@ -107,35 +109,35 @@ public class Controller {
 
     /**
      * Метод, который инициализирует загрузку <b>FXML</b> файла
-     * @param path путь <b>FXML</b> файла
-     * @throws IOException может возникнуть ошибка из-за неправильного пути или отсутсвие файла в системе.
+     * @param path относительный путь <b>FXML</b> файла
+     * @throws IOException ошибка из-за неправильного относительного пути или отсутсвие файла в системе.
      * @since 1.0.5
-     * @see Controller#getInformationOnEntered(String, String)
+     * @see Controller#getInformationOnEntered
      * */
     private void initFxml(String path){
         try {
             var fxmlLoader = window.initFxmlLoader(new FXMLLoader(), "Регистрация", path);
             window.closeWindow(registrationButton);
         } catch (IOException e) {
-            System.out.println("This warning is" + e + "\nPlease correct this warning and repeat this again");
+            System.err.println("This warning is" + e + "\nPlease correct this warning and repeat this again");
         }
     }
 
-    /**
-     * Метод, который проигрывает анимацию и стирает предыдущее данные
+    /** Метод вызывает анимацию из метода {@link InitilizationWindow#playAnimNode(Node)} в меню авторизации и стирает неправильные данные логина и пароля
      * @since 1.0.6
      * @see Controller#initialize()
-     * @param loginTextField поле с логиным
-     * @param passwordTextField поле с паролем*/
-    private void playAnimationOnButtonSignUp(TextField passwordTextField,TextField loginTextField){
-        shake.playAnimationField(passwordTextField);
-        shake.playAnimationField(loginTextField);
+     * */
+    private void playAnimationOnButtonSignUp(){
+        window.playAnimNode(loginLabel);
+        window.playAnimNode(passwordLabel);
+
+        window.playAnimNode(loginTextField);
+        window.playAnimNode(passwordTextField);
 
         loginTextField.clear();
         passwordTextField.clear();
 
-        loginTextField.setPromptText("Введите верный логин");
-        passwordTextField.setPromptText("Введите верный пароль");
     }
+
 
 }

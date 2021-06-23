@@ -14,27 +14,27 @@ public class Shake {
     private TranslateTransition translateTransition;
 
     /**
-     * Метож который будет анимировать необходимый поле окна
+     * Конструктор, который будет анимировать необходимое поле
      * @since 1.0.6
      * @param node элемент окна
      * */
-    public void playAnimationField(Node node){
-        translateTransition = new TranslateTransition(Duration.millis(70), node);
+    public Shake(Node node){
+        translateTransition = new TranslateTransition(Duration.millis(60), node);
 
-        translateTransition.setFromX(0f);
+        translateTransition.setFromX(-10f);
         translateTransition.setByX(10f);
 
         translateTransition.setCycleCount(3);
         translateTransition.setAutoReverse(true);
-        playAnim();
+
     }
 
     /**
-     * Метод который проигрывает анимацию
+     * Метод, который проигрывает анимацию
      * @since 1.0.6
-     * @see Shake#playAnimationField(Node)
+     * @see Shake##Shake(Node)
      * */
-    private void playAnim(){
+    public void playAnim(){
         translateTransition.playFromStart();
     }
 }

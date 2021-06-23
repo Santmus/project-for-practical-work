@@ -43,6 +43,9 @@ public class ControllerRegistration {
 
     @FXML
     private RadioButton radioButtonFemale;
+
+    @FXML
+    private Label genderLabel;
     /**
      * {@value - Создание объекта, который будет отвечать за проверку и создание нового окна}
      * */
@@ -60,7 +63,8 @@ public class ControllerRegistration {
 
         registrationButton.setOnAction(actionEvent -> {
             {
-                String valueOfRadioButton = selectSection(radioButtonFemale);
+                genderLabel.setVisible(false);
+                String valueOfRadioButton = selectSection();
 
                 User user = new User(surnameTextField.getText(), nameTextField.getText(), loginTextField.getText(), passwordTextField.getText(), valueOfRadioButton);
 
@@ -69,36 +73,54 @@ public class ControllerRegistration {
                 boolean checkPassword = window.checkLengthString(user.getPassword());
 
                 if (!check) {
-                    new AlertClass(2, "Не заполненны все поля. Пожалуйста введите все данные, которые от вас требуются", "Внимание", "Недостаточно данных");
+                    new AlertClass(2, "Незаполненны все поля. Пожалуйста введите все данные, которые от вас требуются и повторите попытку.", "Ошибка", "Недостаточно данных");
                 }
                 else if (!(radioButtonFemale.isSelected() || radioButtonMale.isSelected() )){
-                    new AlertClass(2, "Не выбран пол сотрудника. Выберите пол и продолжите.", "Внимание", "Не выбран пол");
+                    warningRadioButton();
+                    //new AlertClass(2, "Не выбран пол сотрудника. Выберите пол и продолжите.", "Ошибка", "Не выбран пол");
                 }
                 else if (!negativeElements){
-                    new AlertClass(2, "Присутствуют запрещенные символы. Проверьте еще раз данные и повторите попытку", "Внимание", "Запрещенные символы");
+                    warningRadioButton();
+                    new AlertClass(2, "Присутствуют запрещенные символы. Проверьте еще раз данные и повторите попытку", "Ошибка", "Запрещенные символы");
                 }
                 else if (!checkPassword) {
-                    new AlertClass(2, "Вы ввели слишком маленький пароль. Попробуйте еще раз.", "Внимание", "Слишком маленький пароль");
+                    /*
+                    window.playAnimNode(passwordTextField);
+                    passwordTextField.clear();
+                    passwordTextField.setPromptText("Введите пароль не менее 8 символов");
+                    */
+                    new AlertClass(2, "Вы ввели слишком маленький пароль. Длина пароля должна быть не менее 8 символов.", "Ошибка", "Слишком маленький пароль");
                 }
                 else if (!specialCodeTextField.getText().equals("07.07.1976")){
-                    new AlertClass(2, "Введен неверный специальный код при регистрации. Повторите попытку. ", "Внимание", "Не вверный код");
+                    /*
+                    window.playAnimNode(specialCodeTextField);
+                    specialCodeTextField.clear();
+                    specialCodeTextField.setPromptText("Неверный специальный код");
+                    */
+                    new AlertClass(2, "Введен неверный специальный код при регистрации. Повторите попытку.", "Ошибка", "Не вверный код");
                 }
                 else {
                     dbHandler.addUserToDatabase(user);
-                    initFxml("../View/app.fxml");
+                    new AlertClass(1, "Вы успешно зарегистрировались в приложении. Для входа в систему необходимо ввести логин и пароль вашей учетной записи", "Информация", "Успех регистрации");
+                    initFxml("../View/authorization.fxml");
                 }
             }
         });
     }
 
+    private void warningRadioButton() {
+        window.playAnimNode(radioButtonMale);
+        window.playAnimNode(radioButtonFemale);
+        window.playAnimNode(genderLabel);
+        genderLabel.setVisible(true);
+    }
 
     /**
      * Метод, который определяет значение <b>RadioButton</b>
-     * @param radioButtonFemale объект женской кнопки
      * @since 1.0.5
      * @see ControllerRegistration#initialize()
      * */
-    private String selectSection (RadioButton radioButtonFemale){
+    private String selectSection(){
         if (radioButtonFemale.isSelected()) return "Женщина";
         else return "Мужчина";
     }
@@ -106,7 +128,7 @@ public class ControllerRegistration {
     /**
      * Метод, который инициализирует загрузку <b>FXML</b> файла
      * @param path путь <b>FXML</b> файла
-     * @throws IOException может возникнуть ошибка из-за неправильного пути или отсутсвие файла в системе.
+     * @throws IOException ошибка из-за неправильного пути или отсутсвие файла в системе.
      * @since 1.0.5
      * @see ControllerRegistration#initialize()
      * */
@@ -115,12 +137,12 @@ public class ControllerRegistration {
             var fxmlLoader = window.initFxmlLoader(new FXMLLoader(), "Регистрация", path);
             window.closeWindow(registrationButton);
         } catch (IOException e) {
-            System.out.println("This warning is" + e + "\nPlease correct this warning and repeat this again");
+            System.err.println("This warning is" + e + "\nPlease correct this warning and repeat this again");
         }
     }
 
     /**
-     * Метод, который группирует <b>RadioButton</b>
+     * Метод, который группирует <b>{@link RadioButton RadioButtons}</b>
      * @since 1.0.5
      * @see ControllerRegistration#initialize()
      * */

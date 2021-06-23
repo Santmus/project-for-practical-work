@@ -11,12 +11,12 @@
       <AnchorPane layoutY="99.0" prefHeight="301.0" prefWidth="700.0" style="-fx-background-color: fafafa;">
          <children>
 
-            <Label layoutX="220.0" layoutY="63.0" text="Введите логин:" textFill="#5e4c4c">
+            <Label fx:id="loginLabel" layoutX="220.0" layoutY="63.0" text="Введите логин:" textFill="#5e4c4c">
                <font>
                   <Font name="Calibri" size="23.0" />
                </font>
             </Label>
-            <Label layoutX="220.0" layoutY="137.0" text="Введите пароль:" textFill="#5e4c4c">
+            <Label fx:id="passwordLabel" layoutX="220.0" layoutY="137.0" text="Введите пароль:" textFill="#5e4c4c">
                <font>
                   <Font name="Calibri" size="23.0" />
                </font>

@@ -17,7 +17,7 @@ public class App extends Application {
     /**
      * Данный метод запускает стартовое окно приложения
      * @param primaryStage первоначальное окно приложения
-     * @throws Exception может возникнуть ошибка из-за неправильного пути или отсутсвие файла в системе.
+     * @throws Exception ошибка из-за неправильного пути или отсутствие файла в системе.
      * Файл должен находится в репозитории:<u>/sample/View</u></p>
      * */
     @Override
@@ -25,6 +25,10 @@ public class App extends Application {
         var fxmlLoader = window.initFxmlLoader(new FXMLLoader(), "ООО \"Евросетка\"", "../View/authorization.fxml");
     }
 
+    /**
+     * Запуск приложения
+     * @since 1.0.0
+     * */
     public static void main(String[] args) {
         launch(args);
     }
