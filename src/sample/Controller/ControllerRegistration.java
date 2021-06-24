@@ -80,7 +80,6 @@ public class ControllerRegistration {
                     //new AlertClass(2, "Не выбран пол сотрудника. Выберите пол и продолжите.", "Ошибка", "Не выбран пол");
                 }
                 else if (!negativeElements){
-                    warningRadioButton();
                     new AlertClass(2, "Присутствуют запрещенные символы. Проверьте еще раз данные и повторите попытку", "Ошибка", "Запрещенные символы");
                 }
                 else if (!checkPassword) {

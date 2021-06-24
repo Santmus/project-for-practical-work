@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import sample.AlertClass;
 import sample.Animations.Shake;
@@ -30,7 +31,7 @@ public class Controller {
     private TextField loginTextField;
 
     @FXML
-    private TextField passwordTextField;
+    private PasswordField passwordTextField;
 
     @FXML
     private Button enteredButton;
@@ -96,7 +97,7 @@ public class Controller {
                 counter++;
             }
             if (counter >= 1) {
-                initFxml("../View/app.fxml");
+                initFxml("../View/main.fxml");
             }
             else{
                 playAnimationOnButtonSignUp();
@@ -116,7 +117,7 @@ public class Controller {
      * */
     private void initFxml(String path){
         try {
-            var fxmlLoader = window.initFxmlLoader(new FXMLLoader(), "Регистрация", path);
+            var fxmlLoader = window.initFxmlLoader(new FXMLLoader(), "Главное меню", path);
             window.closeWindow(registrationButton);
         } catch (IOException e) {
             System.err.println("This warning is" + e + "\nPlease correct this warning and repeat this again");
