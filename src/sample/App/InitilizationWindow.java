@@ -6,7 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyCombination;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import sample.AlertClass;
@@ -21,7 +20,7 @@ import java.io.IOException;
  * <p>Пример: {@link InitilizationWindow#checkFields(boolean, String...)} - проверка полей </p>
  * @author Евгений Казаченко
  * @since 1.0.1
- * @version 1.0.5 - SNAPSHOOT
+ * @version 1.0.9 - SNAPSHOOT
  * */
 public class InitilizationWindow {
 
@@ -46,20 +45,8 @@ public class InitilizationWindow {
         stage.setScene(new Scene(root));
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.getIcons().add(new Image(InitilizationWindow.class.getResourceAsStream("../Assets/logo.png")));
-        keyCombinationList(stage);
         closeStage(stage);
         return stage;
-    }
-
-    private void keyCombinationList(Stage stage) {
-        stage.getScene().getAccelerators().put(
-                KeyCombination.keyCombination("CTRL+R"),
-                () -> {
-                    KeyCombination s = KeyCombination.keyCombination("CTRL+R");
-                    System.out.println("Keycombination Detected");
-                    closeStage(stage);
-                }
-        );
     }
 
     /**

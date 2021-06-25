@@ -4,7 +4,7 @@ package sample.Database.InformationUser;
  * Данный класс представляет собой данные об пользователе, которые используется для вызовов запросов
  * @author Евгений Казаченко
  * @since 1.0.5
- * @version 1.0.5 - SHAPSHOOT
+ * @version 1.0.9 - SHAPSHOOT
  * */
 public class User {
     private String surname;

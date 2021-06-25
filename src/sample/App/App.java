@@ -7,7 +7,7 @@ import javafx.stage.Stage;
  * Данный класс содержит методы для запуска приложения на платформе <b>JavaFX</b>
  * @author Евгений Казаченко
  * @since 1.0.0
- * @version 1.0.5 - SNAPSHOOT
+ * @version 1.0.9 - SNAPSHOOT
  * */
 
 public class App extends Application {

@@ -23,7 +23,7 @@ import sample.Database.InformationUser.User;
  * <p>Класс предназначен для авторизации пользователя приложения, которое использет загрузку из <b>FXML</b> файла с помощью <u><font color='red'>Scene Builder`a</font></u>.</p>
  * @author Евгений Казаченко
  * @since 1.0.2
- * @version 1.0.5 -SNAPSHOOT
+ * @version 1.0.9 - SNAPSHOOT
  * */
 public class Controller {
 

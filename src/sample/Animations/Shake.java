@@ -7,7 +7,7 @@ import javafx.util.Duration;
 /**
  * Класс который будет обрабатывать необходимые анимации, для визуализации приложения
  * @author Евгений Казаченко
- * @version 1.0.6 - SHAPSHOOT
+ * @version 1.0.9 - SHAPSHOOT
  * @since  1.0.6
  * */
 public class Shake {
@@ -32,7 +32,7 @@ public class Shake {
     /**
      * Метод, который проигрывает анимацию
      * @since 1.0.6
-     * @see Shake##Shake(Node)
+     * @see Shake#Shake(Node)
      * */
     public void playAnim(){
         translateTransition.playFromStart();

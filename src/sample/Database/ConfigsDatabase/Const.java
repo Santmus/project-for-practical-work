@@ -4,7 +4,7 @@ package sample.Database.ConfigsDatabase;
  * <p>Данный класс представляет собой <b>final</b> элементы к запросам при добавлении и авторизация пользователя к БД <b><font color = red>MySQL</font></b></p>
  * @author Евгений Казаченко
  * @since 1.0.4
- * @version 1.0.5 - SHAPSHOOT
+ * @version 1.0.9 - SHAPSHOOT
  * */
 public class Const {
 

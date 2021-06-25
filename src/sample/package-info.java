@@ -12,6 +12,6 @@
  *    </ul>
  * @author Евгений Казаченко
  * @since 1.0
- * @version 1.0.5 - SNAPSHOOT
+ * @version 1.0.9 - SNAPSHOOT
  * */
 package sample;

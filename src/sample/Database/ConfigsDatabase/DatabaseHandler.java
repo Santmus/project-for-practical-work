@@ -8,7 +8,7 @@ import java.sql.*;
  * Данный класс представляет собой запросы при добавлении и авторизация пользователя к БД <b><font color = red>MySQL</font></b>
  * @author Евгений Казаченко
  * @since 1.0.4
- * @version 1.0.5 - SHAPSHOOT
+ * @version 1.0.9 - SHAPSHOOT
  * */
 public class DatabaseHandler extends Configs {
 
