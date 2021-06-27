@@ -90,8 +90,9 @@ public class AppController {
         }
         );
         courseExchangeValuesButton.setOnAction(actionEvent -> {
-            System.out.println("Course exchange button is action");}
-        );
+            System.out.println("Course exchange button is action");
+            window.initFxml("Курс валют", "../View/exchangeRates.fxml", courseExchangeValuesButton);
+        });
     }
 
 

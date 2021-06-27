@@ -1,9 +1,14 @@
 package sample.Parsers;
 
+import javafx.collections.ObservableList;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import sample.Controller.ControllerExchangeRates;
+import sample.Parsers.Data.DataCourse;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -45,7 +50,7 @@ public class BankCourseParser {
     private void downloadUsingNIO(String urlStr) throws IOException {
         URL url = new URL(urlStr);
         ReadableByteChannel rbc = Channels.newChannel(url.openStream());
-        FileOutputStream fos = new FileOutputStream("src/sample/Convertation/course.json");
+        FileOutputStream fos = new FileOutputStream("src/sample/Price/course.json");
         fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
         System.out.println("File dowload");
         fos.close();
@@ -59,11 +64,12 @@ public class BankCourseParser {
      * @throws FileNotFoundException происходит из-за отсутсвия файла в директории
      * @throws java.text.ParseException происходит из-за проблем парсинга <b><u>JSON</u></b> файла
      * @throws IOException глобальная ошибка
-     * */
-    private void parseJSON(){
+     * @param courseData
+     * @param exchangeRatesTableView */
+    public void parseJSON(ObservableList<DataCourse> courseData, TableView<DataCourse> exchangeRatesTableView){
         try {
             downloadJSON();
-            FileReader fileReader = new FileReader("src/sample/Convertation/course.json");
+            FileReader fileReader = new FileReader("src/sample/Price/course.json");
 
             JSONParser jsonParser = new JSONParser();
             JSONArray jsonArray = (JSONArray) jsonParser.parse(fileReader);
@@ -79,7 +85,11 @@ public class BankCourseParser {
 
                 String cur_abbreviation = (String) jsonObject.get("Cur_Abbreviation");
                 System.out.println("The abbreviation is: " + cur_abbreviation);
+
+                courseData.add(new DataCourse(cur_Name,cur_abbreviation,cur_OfficialRate));
+                exchangeRatesTableView.setItems(courseData);
                 System.out.println("\n");
+
             }
         } catch (FileNotFoundException e) {
             System.err.println("This file doesn`t find");
@@ -91,6 +101,7 @@ public class BankCourseParser {
         }
     }
 
+
     /**
      * Метод, предназначенный для получение необходимой валюты при парсинге <b><u>JSON</u></b> файла
      * @since 1.0.9
@@ -101,9 +112,10 @@ public class BankCourseParser {
      * @throws IOException глобальная ошибка
      * */
     public double chooseCourse(String abbreviation)  {
+
         FileReader fileReader = null;
         try {
-            fileReader = new FileReader("src/sample/Convertation/course.json");
+            fileReader = new FileReader("src/sample/Price/course.json");
         } catch (FileNotFoundException e) {
             System.err.println("This file doesn`t find");
             try {
