@@ -1,5 +1,6 @@
 package sample.Database.ConfigsDatabase;
 
+import sample.Controller.Controller;
 import sample.Controller.ControllerRegistration;
 import sample.Database.InformationUser.User;
 
@@ -39,7 +40,7 @@ public class DatabaseHandler extends Configs {
      * @see ControllerRegistration#initialize()
      * */
     public void addUserToDatabase(User user) {
-        PreparedStatement addUserToDatabase = null;
+        PreparedStatement addUserToDatabase;
         try {
             Connection connection = getDbConnection();
             String addUser = Const.INSERT + Const.EVROSETKA_TABLE
@@ -65,7 +66,7 @@ public class DatabaseHandler extends Configs {
      * Метод предназначен для авторизации пользователя в <b><font color = red>приложений</font></b>,с возмоджностью дальнейшей работы этим пользователям
      * @since 1.0.4
      * @param user передается весь пользователь с необходимыми данными в методе
-     * @see sample.Controller.Controller#getInformationOnEntered(String, String)
+     * @see Controller#getInformationOnEntered()
      * @throws SQLException отсутсвует подключение к <b><font color = red>MySQL</font></b>, в связи с отсутсвием БД в системе
      * @throws ClassNotFoundException не существует такого где происходит поключение к БД
      * */

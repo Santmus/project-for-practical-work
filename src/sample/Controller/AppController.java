@@ -85,7 +85,9 @@ public class AppController {
         });
 
         chooseConvertationButton.setOnAction(actionEvent -> {
-            System.out.println("Choose convertation button is action");}
+            System.out.println("Choose convertation button is action");
+            window.initFxml("Выбор валюты", "../View/chooseValueConvertation.fxml", chooseConvertationButton);
+        }
         );
         courseExchangeValuesButton.setOnAction(actionEvent -> {
             System.out.println("Course exchange button is action");}

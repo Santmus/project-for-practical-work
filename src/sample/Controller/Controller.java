@@ -1,23 +1,18 @@
 package sample.Controller;
 
-import java.io.IOException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Timer;
-
-import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import sample.AlertClass;
-import sample.Animations.Shake;
 import sample.App.InitilizationWindow;
 import sample.Database.ConfigsDatabase.DatabaseHandler;
 import sample.Database.InformationUser.User;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * <p>Класс предназначен для авторизации пользователя приложения, которое использет загрузку из <b>FXML</b> файла с помощью <u><font color='red'>Scene Builder`a</font></u>.</p>
@@ -70,9 +65,7 @@ public class Controller {
                 getInformationOnEntered();
             }
         });
-        registrationButton.setOnAction(actionEvent -> {
-            initFxml("../View/registration.fxml");
-        });
+        registrationButton.setOnAction(actionEvent -> window.initFxml("Регистрация","../View/registration.fxml", registrationButton));
     }
 
     /**
@@ -97,30 +90,14 @@ public class Controller {
                 counter++;
             }
             if (counter >= 1) {
-                initFxml("../View/main.fxml");
+                window.initFxml("Главное меню","../View/main.fxml", enteredButton);
             }
             else{
                 playAnimationOnButtonSignUp();
                 System.err.println("Вход не выполнен, повторите попытку");
             }
         } catch (SQLException e) {
-            e.getSQLState();
-        }
-    }
-
-    /**
-     * Метод, который инициализирует загрузку <b>FXML</b> файла
-     * @param path относительный путь <b>FXML</b> файла
-     * @throws IOException ошибка из-за неправильного относительного пути или отсутсвие файла в системе.
-     * @since 1.0.5
-     * @see Controller#getInformationOnEntered
-     * */
-    private void initFxml(String path){
-        try {
-            var fxmlLoader = window.initFxmlLoader(new FXMLLoader(), "Главное меню", path);
-            window.closeWindow(registrationButton);
-        } catch (IOException e) {
-            System.err.println("This warning is" + e + "\nPlease correct this warning and repeat this again");
+            System.out.println(e.getSQLState());
         }
     }
 
@@ -139,6 +116,4 @@ public class Controller {
         passwordTextField.clear();
 
     }
-
-
 }

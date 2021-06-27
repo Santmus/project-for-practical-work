@@ -1,11 +1,8 @@
 package sample.Controller;
 
-import java.io.IOException;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import sample.AlertClass;
 import sample.App.InitilizationWindow;
@@ -77,36 +74,31 @@ public class ControllerRegistration {
                 }
                 else if (!(radioButtonFemale.isSelected() || radioButtonMale.isSelected() )){
                     warningRadioButton();
-                    //new AlertClass(2, "Не выбран пол сотрудника. Выберите пол и продолжите.", "Ошибка", "Не выбран пол");
+                    // new AlertClass(2, "Не выбран пол сотрудника. Выберите пол и продолжите.", "Ошибка", "Не выбран пол");
                 }
                 else if (!negativeElements){
                     new AlertClass(2, "Присутствуют запрещенные символы. Проверьте еще раз данные и повторите попытку", "Ошибка", "Запрещенные символы");
                 }
                 else if (!checkPassword) {
-                    /*
-                    window.playAnimNode(passwordTextField);
-                    passwordTextField.clear();
-                    passwordTextField.setPromptText("Введите пароль не менее 8 символов");
-                    */
                     new AlertClass(2, "Вы ввели слишком маленький пароль. Длина пароля должна быть не менее 8 символов.", "Ошибка", "Слишком маленький пароль");
                 }
                 else if (!specialCodeTextField.getText().equals("07.07.1976")){
-                    /*
-                    window.playAnimNode(specialCodeTextField);
-                    specialCodeTextField.clear();
-                    specialCodeTextField.setPromptText("Неверный специальный код");
-                    */
                     new AlertClass(2, "Введен неверный специальный код при регистрации. Повторите попытку.", "Ошибка", "Не вверный код");
                 }
                 else {
                     dbHandler.addUserToDatabase(user);
                     new AlertClass(1, "Вы успешно зарегистрировались в приложении. Для входа в систему необходимо ввести логин и пароль вашей учетной записи", "Информация", "Успех регистрации");
-                    initFxml("../View/authorization.fxml");
+                    window.initFxml("ООО \"Евросетка\"","../View/authorization.fxml", registrationButton);
                 }
             }
         });
     }
 
+    /**
+     * Метод, который производит анимацию при не нажатии на <b><font color = 'red'>RadioButton</font></b>
+     * @since 1.0.6
+     * @see ControllerRegistration#initialize()
+     * */
     private void warningRadioButton() {
         window.playAnimNode(radioButtonMale);
         window.playAnimNode(radioButtonFemale);
@@ -122,22 +114,6 @@ public class ControllerRegistration {
     private String selectSection(){
         if (radioButtonFemale.isSelected()) return "Женщина";
         else return "Мужчина";
-    }
-
-    /**
-     * Метод, который инициализирует загрузку <b>FXML</b> файла
-     * @param path путь <b>FXML</b> файла
-     * @throws IOException ошибка из-за неправильного пути или отсутсвие файла в системе.
-     * @since 1.0.5
-     * @see ControllerRegistration#initialize()
-     * */
-    private void initFxml(String path){
-        try {
-            var fxmlLoader = window.initFxmlLoader(new FXMLLoader(), "Регистрация", path);
-            window.closeWindow(registrationButton);
-        } catch (IOException e) {
-            System.err.println("This warning is" + e + "\nPlease correct this warning and repeat this again");
-        }
     }
 
     /**

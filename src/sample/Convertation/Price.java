@@ -13,8 +13,9 @@ public class Price {
      * @param count количество покупамого товара
      * @param price стоимость в оригинальной валюте
      * @param course курс валюты
-     * @return возращает сумму товара*/
-    public static float sum(int count, float course, float price){
+     * @return возращает сумму товара
+     * */
+    public static double sum(int count, double course, double price){
         return (count * price) / course;
     }
 

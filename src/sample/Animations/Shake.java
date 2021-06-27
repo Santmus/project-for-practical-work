@@ -11,7 +11,7 @@ import javafx.util.Duration;
  * @since  1.0.6
  * */
 public class Shake {
-    private TranslateTransition translateTransition;
+    private final TranslateTransition translateTransition;
 
     /**
      * Конструктор, который будет анимировать необходимое поле

@@ -2,5 +2,6 @@
  * <p>Данный пакет предназначен для хранения различных видов картинок, для работы с программой</p>
  * @author Евгений Казаченко
  * @since 1.0.2
- * @version 1.0.9 - SNAPSHOOT*/
+ * @version 1.0.9 - SNAPSHOOT
+ * */
 package sample.Assets;

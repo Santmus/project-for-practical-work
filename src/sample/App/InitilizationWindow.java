@@ -30,6 +30,7 @@ public class InitilizationWindow {
     private final String[] negativeElements = {"\\", "/", ":", "*", "?", "<", ">", "|", " "};
 
     private Shake shake;
+
     /**
      * Метод, который возращает окно
      * @since 1.0.1
@@ -138,8 +139,7 @@ public class InitilizationWindow {
      * Метод предназначен для закрытия предыдущего окна, при переходе к другому окну
      * @param button кнопка, из которой происходит переход к другому окну приложения
      * @since 1.0.1
-     * @see Controller#initFxml(String)
-     * @see ControllerRegistration#initFxml(String)
+     * @see InitilizationWindow#initFxml(String, String, Button)*
      * */
     public void closeWindow(Button button){
         Stage stage = (Stage) button.getScene().getWindow();
@@ -154,6 +154,23 @@ public class InitilizationWindow {
     public void playAnimNode(Node node){
         Shake anim = new Shake(node);
         anim.playAnim();
+    }
+
+    /**
+     * Метод, который инициализирует загрузку <b>FXML</b> файла
+     * @param path путь <b>FXML</b> файла
+     * @throws IOException ошибка из-за неправильного пути или отсутсвие файла в системе.
+     * @since 1.0.5
+     * @see ControllerRegistration#initialize()
+     * @see Controller#initialize()
+     * */
+    public void initFxml(String title, String path, Button button){
+        try {
+            var fxmlLoader = initFxmlLoader(new FXMLLoader(), title, path);
+             closeWindow(button);
+        } catch (IOException e) {
+            System.err.println("This warning is" + e + "\nPlease correct this warning and repeat this again");
+        }
     }
 }
 

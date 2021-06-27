@@ -22,7 +22,7 @@ public class App extends Application {
      * */
     @Override
     public void start(Stage primaryStage) throws Exception{
-        var fxmlLoader = window.initFxmlLoader(new FXMLLoader(), "ООО \"Евросетка\"", "../View/authorization.fxml");
+        window.initFxmlLoader(new FXMLLoader(), "ООО \"Евросетка\"", "../View/authorization.fxml");
     }
 
     /**
