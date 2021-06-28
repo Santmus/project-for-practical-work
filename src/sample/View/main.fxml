@@ -23,10 +23,11 @@
                <children>
                   <TableView fx:id="productTableView" prefHeight="351.0" prefWidth="643.0">
                     <columns>
-                      <TableColumn fx:id="nameOfProductTableColumn" editable="false" prefWidth="186.0" text="Наименнование товара" />
-                      <TableColumn fx:id="countOfProductTableColumn" editable="false" minWidth="0.0" prefWidth="188.0" text="Количество товара" />
-                        <TableColumn fx:id="companyTableColumn" editable="false" prefWidth="204.0" text="Компания" />
-                        <TableColumn fx:id="costTableColumn" editable="false" minWidth="0.0" prefWidth="130.0" text="Стоимость" />
+                      <TableColumn fx:id="nameOfProductTableColumn" editable="false" prefWidth="216.0" text="Наименнование товара" />
+                      <TableColumn fx:id="sizeOfProductTableColumn" editable="false" minWidth="0.0" prefWidth="91.0" text="Размер " />
+                        <TableColumn fx:id="brandTableColumn" editable="false" prefWidth="87.0" text="Марка" />
+                        <TableColumn fx:id="regionTableColumn" editable="false" prefWidth="132.0" text="Регион" />
+                        <TableColumn fx:id="costTableColumn" editable="false" minWidth="0.0" prefWidth="185.0" text="Стоимость" />
                     </columns>
                   </TableView>
                </children>

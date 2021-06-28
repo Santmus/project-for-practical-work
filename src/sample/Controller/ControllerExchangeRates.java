@@ -9,6 +9,13 @@ import sample.App.InitilizationWindow;
 import sample.Parsers.BankCourseParser;
 import sample.Parsers.Data.DataCourse;
 
+/**
+ * Класс предназначен для просмотра нынешнего курса валют по отношению к
+ * белорусскому рублю
+ * @author Евгений Казаченко
+ * @since 1.1.1
+ * @version 1.1.1-SNAPSHOOT
+ * */
 public class ControllerExchangeRates {
 
     @FXML
@@ -18,13 +25,13 @@ public class ControllerExchangeRates {
     public TableView<DataCourse> exchangeRatesTableView;
 
     @FXML
-    public TableColumn<DataCourse, String> nameExchangeTableColumn;
+    private TableColumn<DataCourse, String> nameExchangeTableColumn;
 
     @FXML
-    public TableColumn<DataCourse, String> abbreviationTableColumn;
+    private TableColumn<DataCourse, String> abbreviationTableColumn;
 
     @FXML
-    public TableColumn<DataCourse, Double> priceTableColumn;
+    private TableColumn<DataCourse, Double> priceTableColumn;
 
     @FXML
     private Label informationLabel;
@@ -36,6 +43,10 @@ public class ControllerExchangeRates {
 
     private final InitilizationWindow initilizationWindow = new InitilizationWindow();
 
+    /**
+     * Метод, который инициализирует поведение приложения в данном окне
+     * @since 1.1.10
+     * */
     @FXML
     void initialize() {
 

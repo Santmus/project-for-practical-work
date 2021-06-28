@@ -2,7 +2,6 @@ package sample.Parsers;
 
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -64,8 +63,10 @@ public class BankCourseParser {
      * @throws FileNotFoundException происходит из-за отсутсвия файла в директории
      * @throws java.text.ParseException происходит из-за проблем парсинга <b><u>JSON</u></b> файла
      * @throws IOException глобальная ошибка
-     * @param courseData
-     * @param exchangeRatesTableView */
+     * @param courseData столбик в которой содержитя данные курса валют
+     * @param exchangeRatesTableView таблица в которой содержится курс валют
+     * @see ControllerExchangeRates#initialize()
+     * */
     public void parseJSON(ObservableList<DataCourse> courseData, TableView<DataCourse> exchangeRatesTableView){
         try {
             downloadJSON();
@@ -110,6 +111,7 @@ public class BankCourseParser {
      * @throws FileNotFoundException происходит из-за отсутсвия файла в директории
      * @throws java.text.ParseException происходит из-за проблем парсинга <b><u>JSON</u></b> файла
      * @throws IOException глобальная ошибка
+     * @see sample.Controller.ControllerChooseConverter#informationWindow(String, double)
      * */
     public double chooseCourse(String abbreviation)  {
 

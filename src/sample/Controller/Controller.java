@@ -51,7 +51,6 @@ public class Controller {
      * */
     @FXML
     void initialize() {
-
         enteredButton.setOnAction(actionEvent -> {
             boolean check = window.checkFields(true, loginTextField.getText().trim(), passwordTextField.getText().trim());
             boolean negativeElements = window.checkNegativeElements(loginTextField.getText(), passwordTextField.getText());

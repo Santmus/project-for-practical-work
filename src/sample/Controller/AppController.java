@@ -1,11 +1,16 @@
 package sample.Controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import sample.App.InitilizationWindow;
+import sample.Parsers.Data.Product;
+import sample.Parsers.HtmlSiteParser;
 
 
 /**
@@ -21,19 +26,24 @@ public class AppController {
     private AnchorPane windowAnchorPane;
 
     @FXML
-    private TableView<?> productTableView;
+    public TableView<Product> productTableView;
+
+    public ObservableList<Product> productData = FXCollections.observableArrayList();
 
     @FXML
-    private TableColumn<?, ?> nameOfProductTableColumn;
+    private TableColumn<Product, String> nameOfProductTableColumn;
 
     @FXML
-    private TableColumn<?, ?> countOfProductTableColumn;
+    private TableColumn<Product, String> sizeOfProductTableColumn;
 
     @FXML
-    private TableColumn<?, ?> companyTableColumn;
+    private TableColumn<Product, String> brandTableColumn;
 
     @FXML
-    private TableColumn<?, ?> costTableColumn;
+    private TableColumn<Product, String> regionTableColumn;
+
+    @FXML
+    private TableColumn<Product, String> costTableColumn;
 
     @FXML
     private Button nextButton;
@@ -79,6 +89,16 @@ public class AppController {
 
         loadDatailTableViewButton.setOnAction(actionEvent -> {
             System.out.println("load detail button is action");
+
+            nameOfProductTableColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("nameOfProduct"));
+            sizeOfProductTableColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("sizeOfProduct"));
+            brandTableColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("brand"));
+            regionTableColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("region"));
+            costTableColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("cost"));
+
+            HtmlSiteParser htmlSiteParser = new HtmlSiteParser();
+            htmlSiteParser.loadDataToHTML(0, productTableView, productData);
+
         });
         upgradeTableViewButton.setOnAction(actionEvent -> {
             System.out.println("Upgrade table button is action");
@@ -89,6 +109,7 @@ public class AppController {
             window.initFxml("Выбор валюты", "../View/chooseValueConvertation.fxml", chooseConvertationButton);
         }
         );
+        // complete
         courseExchangeValuesButton.setOnAction(actionEvent -> {
             System.out.println("Course exchange button is action");
             window.initFxml("Курс валют", "../View/exchangeRates.fxml", courseExchangeValuesButton);
