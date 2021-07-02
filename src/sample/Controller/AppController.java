@@ -64,9 +64,6 @@ public class AppController {
     private Button chooseConvertationButton;
 
     @FXML
-    private Button upgradeTableViewButton;
-
-    @FXML
     private Button courseExchangeValuesButton;
 
     private final InitilizationWindow window = new InitilizationWindow();
@@ -87,6 +84,7 @@ public class AppController {
             System.out.println("First page button is action");
         });
 
+        //25 %
         loadDatailTableViewButton.setOnAction(actionEvent -> {
             System.out.println("load detail button is action");
 
@@ -100,15 +98,14 @@ public class AppController {
             htmlSiteParser.loadDataToHTML(0, productTableView, productData);
 
         });
-        upgradeTableViewButton.setOnAction(actionEvent -> {
-            System.out.println("Upgrade table button is action");
-        });
 
+        // 85 %
         chooseConvertationButton.setOnAction(actionEvent -> {
             System.out.println("Choose convertation button is action");
             window.initFxml("Выбор валюты", "../View/chooseValueConvertation.fxml", chooseConvertationButton);
         }
         );
+
         // complete
         courseExchangeValuesButton.setOnAction(actionEvent -> {
             System.out.println("Course exchange button is action");

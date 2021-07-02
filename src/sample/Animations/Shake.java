@@ -5,16 +5,16 @@ import javafx.scene.Node;
 import javafx.util.Duration;
 
 /**
- * Класс который будет обрабатывать необходимые анимации, для визуализации приложения
+ * Класс предназначен для обрабатки анимации, необходимых полей
  * @author Евгений Казаченко
- * @version 1.0.9 - SHAPSHOOT
+ * @version 1.0.12 - SHAPSHOOT
  * @since  1.0.6
  * */
 public class Shake {
     private final TranslateTransition translateTransition;
 
     /**
-     * Конструктор, который будет анимировать необходимое поле
+     * Конструктор, которой добавляет анимацию необходимому полю
      * @since 1.0.6
      * @param node элемент окна
      * */
@@ -30,7 +30,7 @@ public class Shake {
     }
 
     /**
-     * Метод, который проигрывает анимацию
+     * Метод, предназначен для активации анимации
      * @since 1.0.6
      * @see Shake#Shake(Node)
      * */

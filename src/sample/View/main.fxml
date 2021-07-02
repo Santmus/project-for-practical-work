@@ -52,22 +52,17 @@
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="loadDatailTableViewButton" layoutX="20.0" layoutY="14.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="208.0" style="-fx-background-radius: 5;" text="Загрузить данные в таблицу">
+            <Button fx:id="loadDatailTableViewButton" layoutX="120.0" layoutY="14.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="208.0" style="-fx-background-radius: 5;" text="Загрузить данные в таблицу">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="chooseConvertationButton" layoutX="241.0" layoutY="14.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="208.0" style="-fx-background-radius: 5;" text="Выбрать валюту">
+            <Button fx:id="chooseConvertationButton" layoutX="360.0" layoutY="14.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="208.0" style="-fx-background-radius: 5;" text="Выбрать валюту">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="upgradeTableViewButton" layoutX="462.0" layoutY="14.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="208.0" style="-fx-background-radius: 5;" text="Обновить таблицу">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
-            <Button fx:id="courseExchangeValuesButton" layoutX="685.0" layoutY="14.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="208.0" style="-fx-background-radius: 5;" text="Посмотреть курс валют">
+            <Button fx:id="courseExchangeValuesButton" layoutX="598.0" layoutY="14.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="208.0" style="-fx-background-radius: 5;" text="Посмотреть курс валют">
                <font>
                   <Font size="14.0" />
                </font>

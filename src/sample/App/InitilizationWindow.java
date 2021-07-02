@@ -20,7 +20,7 @@ import java.io.IOException;
  * <p>Пример: {@link InitilizationWindow#checkFields(boolean, String...)} - проверка полей </p>
  * @author Евгений Казаченко
  * @since 1.0.1
- * @version 1.0.9 - SNAPSHOOT
+ * @version 1.0.12 - SNAPSHOOT
  * */
 public class InitilizationWindow {
 
@@ -32,33 +32,36 @@ public class InitilizationWindow {
     private Shake shake;
 
     /**
-     * Метод, который возращает окно
+     * Метод, который инициализирует новое окно и возращает его
      * @since 1.0.1
      * @param root объект, образующий новое окно
      * @param title заголовок для нового окна
      * @return новое окно
      * @see InitilizationWindow#initStage(Parent, String)
      * */
-    private Stage initStage(Parent root, String title) {
+    public Stage initStage(Parent root, String title) {
         Stage stage = new Stage();
         stage.setTitle(title);
         stage.setResizable(false);
         stage.setScene(new Scene(root));
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.getIcons().add(new Image(InitilizationWindow.class.getResourceAsStream("../Assets/logo.png")));
-        closeStage(stage);
+
+        closeStage(stage, root);
+
         return stage;
     }
 
     /**
      * Метод предназначен для активации скрипта - закрытии окна, при переходе к другому окну
      * @param stage нынешнее окно приложения
+     * @param root
      * @since 1.0.1
      * @see InitilizationWindow#initStage(Parent, String)
      * */
-    private void closeStage(Stage stage){
+    private void closeStage(Stage stage, Parent root){
         stage.setOnCloseRequest(event -> {
-        new AlertClass("Вы точно хотите выйти из программы?","ООО \"Евросетка\"","Выход из приложения", stage);
+        new AlertClass("Вы точно хотите выйти из программы?","ООО \"Евросетка\"","Выход из приложения",  root);
         });
     }
 

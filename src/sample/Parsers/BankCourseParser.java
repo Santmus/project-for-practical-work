@@ -149,7 +149,6 @@ public class BankCourseParser {
             double cur_OfficialRate = (double) jsonObject.get("Cur_OfficialRate");
             String cur_abbreviation = (String) jsonObject.get("Cur_Abbreviation");
 
-
             if (cur_abbreviation.equals(abbreviation)){
                 System.out.println(cur_OfficialRate);
                 return cur_OfficialRate;

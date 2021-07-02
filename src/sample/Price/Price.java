@@ -1,4 +1,4 @@
-package sample.Convertation;
+package sample.Price;
 
 /**
  * Класс предназначен для высчитывании суммы товара, который мы хотим <b>изучить/купить</b>

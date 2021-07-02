@@ -1,31 +1,35 @@
 package sample;
 
 import javafx.application.Platform;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import sample.App.InitilizationWindow;
 
 import java.util.Optional;
 
 /** <p>Данный класс предназначен для инициализации допольнительных окон, в которых выводится различная информация, такие как: </p>
  * <ol>
- * <li> Дополнительная информация при выполнения программы </li>
- * <li> Определенные ошибки, которые нужно исправить </li>
- * <li> Окна с определенным выбором</li>
+ * <li> Дополнительная информация при выполнении программы </li>
+ * <li> Предупреждения/ошибки, которые нужно исправить, или обратить на их анимание </li>
+ * <li> Окна при заверщение работы</li>
  * </ol>
  * @author Евгений Казаченко
  * @since 1.0.0
- * @version 1.0.9 - SNAPSHOOT
+ * @version 1.0.12 - SNAPSHOOT
  * */
 public class AlertClass{
+
+    private final InitilizationWindow initilizationWindow = new InitilizationWindow();
 
     /**
      * <p>Данный конструктор предназначен для вывода необходимого дополнительного окна.</p>
      * <p>После происходит вызова метода {@link AlertClass#getAlertInformation(Alert, String, String, String)}</p>
      * @param title заголовок, который будет использоватся для дополнительного окна
-     * @param content необходимая информация, которая будет написана в дополнительном окне
-     * @param header наименновие проблемы/ошибки/информации, которая будет выведенна в дополнительном окне
+     * @param content необходимая информация, которая будет выведена в дополнительном окне
+     * @param header наименновие проблемы/ошибки/информации, которая будет выведена в дополнительном окне
      * @param number номер, из-за которого будет выводится необходимое дополнительное окно
      * @since 1.0.1
      * */
@@ -55,24 +59,23 @@ public class AlertClass{
     }
 
     /**
-     * <p>Данный конструктор предназначен для вывода дополнительного окна с выбором</p>
-     * <p>После происходит вызова метода {@link AlertClass#getExitInformation(Alert, String, String, String, Stage)}</p>
-     * @param title заголовок, который будет использоватся для дополнительного окна с выбором
-     * @param content необходимая информация, которая будет написана в дополнительном окне с выбором
-     * @param header наименновие проблемы/ошибки/информации, которая будет выведенна в дополнительном окне с выбором
-     * @param stage текущее окно
+     * <p>Данный конструктор предназначен для вывода завершающего окна</p>
+     * <p>После происходит вызова метода {@link AlertClass#getExitInformation(Alert, String, String, String, Parent)}</p>
+     * @param title заголовок, который будет использоватся для завершающего окна
+     * @param content необходимая информация, которая будет выведена в завершающем окне
+     * @param root объект, образующий новое окно
      * @since 1.0.5
      * */
-    public AlertClass(String content, String title, String header, Stage stage){
+    public AlertClass(String content, String title, String header, Parent root){
         Alert alert;
         alert = new Alert(Alert.AlertType.CONFIRMATION);
-        getExitInformation(alert, content, title, header, stage);
+        getExitInformation(alert, content, title, header, root);
     }
 
     /**
-     * Метод, который выводит допольнительно окно с информацией
-     * @param header наименновие проблемы/ошибки/информации, которая будет написана в дополнительном окне
-     * @param content необходимая информация, которая будет выведенна в дополнительном окне
+     * Метод, который выводит дополнительное окно с информацией
+     * @param header наименнование проблемы/ошибки/информации, которая будет выведена в дополнительном окне
+     * @param content необходимая информация, которая будет выведена в дополнительном окне
      * @param title заголовок дополнительного окна
      * @param alert объект из которого создается новое дополнительное окно
      * @since 1.0.2
@@ -87,29 +90,29 @@ public class AlertClass{
     }
 
     /**
-     * Метод, который выводит допольнительно окно с выбором
-     * @param header наименновие проблемы/ошибки/информации, которая будет написана в дополнительном окне с выбором
-     * @param content необходимая информация, которая будет выведенна в дополнительном окне с выбором
-     * @param title заголовок дополнительного окна с выбором
-     * @param alert объект из которого создается новое дополнительное окно с выбором
-     * @param returnStage текущее окно
+     * Метод, который выводит завершающее окно
+     * @param alert объект из которого создается завершающее окно
+     * @param content необходимая информация, которая будет выведена в завершающем окне
+     * @param title заголовок в завершающем окне
+     * @param root объект, образующий новое окно
      * @since 1.0.2
      * */
-    private void getExitInformation(Alert alert, String content, String title, String header, Stage returnStage){
+    private void getExitInformation(Alert alert, String content, String title, String header, Parent root){
         alert.setTitle(title);
         var stage = (Stage) alert.getDialogPane().getScene().getWindow();
         stage.getIcons().add(new Image(AlertClass.class.getResourceAsStream("Assets/logo.png"))) ;
         alert.setContentText(content);
-        alert.setHeaderText(content);
+        alert.setHeaderText(header);
         ButtonType exitProgramButton = new ButtonType("Завершить");
         ButtonType returnProgramButton = new ButtonType("Отмена");
         alert.getButtonTypes().clear();
         alert.getButtonTypes().addAll(returnProgramButton, exitProgramButton);
         Optional<ButtonType> option = alert.showAndWait();
         option.get();
-        // fix return window
-        if (option.get() == returnProgramButton) {
 
+       //solver problem "do work but it void error:AnchorPane@6b2dc020[styleClass=root]is already set as root of another scene"
+        if (option.get() == returnProgramButton) {
+            initilizationWindow.initStage(root, title);
         } else if (option.get() == exitProgramButton) {
             System.out.println("Program finish work");
             Platform.exit();

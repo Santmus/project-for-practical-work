@@ -4,10 +4,11 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 /**
- * Данный класс содержит методы для запуска приложения на платформе <b>JavaFX</b>
+ * Главный класс, который создает основной поток <b>App</b>
+ * и предназначен для запуска настольного приложения разработанного на базе <b>JavaFX</b>
  * @author Евгений Казаченко
  * @since 1.0.0
- * @version 1.0.9 - SNAPSHOOT
+ * @version 1.0.12 - SNAPSHOOT
  * */
 
 public class App extends Application {
@@ -26,7 +27,7 @@ public class App extends Application {
     }
 
     /**
-     * Запуск приложения
+     * Метод, в котором происходит запуск основного потока
      * @since 1.0.0
      * */
     public static void main(String[] args) {
